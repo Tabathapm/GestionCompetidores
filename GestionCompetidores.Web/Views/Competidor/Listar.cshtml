@@ -1,0 +1,53 @@
+﻿﻿@using GestionCompetidores.Data.EF;
+@model List<Competidor>
+
+@{
+    ViewBag.Title = "Competidores";
+}
+
+<form action="/Competidor/Listar" method="post">
+    <div>
+        Deporte:
+        <select name="idDeporte">
+            <option value="">Todos</option>
+            @foreach (Deporte deporte in ViewBag.Deportes)
+            {
+                if (ViewBag.IdDeporteSeleccionado != null && ViewBag.IdDeporteSeleccionado == deporte.IdDeporte)
+                {
+                    <option selected="selected" value="@deporte.IdDeporte">@deporte.NombreDeporte</option>
+                }
+                else
+                {
+                    <option value="@deporte.IdDeporte">@deporte.NombreDeporte</option>
+                }
+            }
+        </select>
+    </div>
+    <input type="submit" value="Filtrar" />
+
+</form>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Deporte</th>
+            <th scope="col">Nombre del Competidor</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Competidor competidor in Model)
+        {
+            <tr>
+                <td>
+                    @if (competidor.IdDeporteNavigation != null)
+                    {
+                        @competidor.IdDeporteNavigation.NombreDeporte
+                    }
+                </td>
+                <td>@competidor.NombreCompetidor</td>
+            </tr>
+        }
+    </tbody>
+</table>

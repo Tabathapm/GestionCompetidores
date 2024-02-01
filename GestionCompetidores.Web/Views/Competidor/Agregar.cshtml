@@ -1,0 +1,28 @@
+﻿@using GestionCompetidores.Data.EF;
+
+@model Competidor
+
+@{
+    ViewBag.Title = "Agregar Competidor";
+}
+
+<form action="/Competidor/Agregar" method="post">
+
+    <div>
+        Nombre:
+        <input type="text" name="NombreCompetidor" value="@Model.NombreCompetidor" />
+    </div>
+
+    <div>
+        Deporte:
+        <select name="IdDeporte">
+            @foreach (Deporte deporte in ViewBag.Deportes)
+            {
+                <option value="@deporte.IdDeporte">@deporte.NombreDeporte</option>
+            }
+        </select>
+    </div>
+
+    <input type="submit" value="Agregar Competidor" />
+
+</form>
